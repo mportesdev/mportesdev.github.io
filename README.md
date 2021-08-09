@@ -1,3 +1,1 @@
-# Michal Porteš
-
-Python developer
+Michal Porteš, Python developer
