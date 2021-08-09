@@ -1,1 +1,1 @@
-Michal Porteš, Python developer
+repository for [mportesdev.github.io](https://mportesdev.github.io)
