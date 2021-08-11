@@ -10,7 +10,8 @@ from urllib.request import urlopen
 
 def module_from_url(module_name, url):
     # get contents of URL
-    url_contents = urlopen(url).read()
+    with urlopen(url) as response:
+        url_contents = response.read()
 
     # store contents in temporary .py file
     with NamedTemporaryFile(suffix='.py') as temp_file:
