@@ -25,7 +25,7 @@ from tempfile import NamedTemporaryFile
 from urllib.request import urlopen
 
 
-def module_from_url(name, url):
+def module_from_url(module_name, url):
     # get contents of URL
     with urlopen(url) as response:
         url_contents = response.read()
@@ -36,7 +36,7 @@ def module_from_url(name, url):
         temp_file.seek(0)
 
         # import temporary file as Python module
-        spec = spec_from_file_location(name, temp_file.name)
+        spec = spec_from_file_location(module_name, temp_file.name)
         module = module_from_spec(spec)
         spec.loader.exec_module(module)
 
