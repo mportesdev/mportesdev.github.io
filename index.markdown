@@ -5,8 +5,6 @@
 layout: home
 ---
 
-Welcome, and thanks for visiting.
-My name is Michal and I like tinkering with the [Python] programming language.
-This is my humble blog.
+Welcome. My name is Michal this is my mini-blog.
 
 [Python]: https://www.python.org/
