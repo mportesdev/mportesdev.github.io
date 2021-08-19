@@ -65,7 +65,7 @@ but that would become impractical if we had many sequences in `data`.
 ### Functional approach
 
 Alternatively, out iterable sequences can be concatenated using
-`itertools.chain`:
+[`itertools.chain`][docs_chain]:
 
 ```pycon
 >>> from itertools import chain
@@ -75,8 +75,8 @@ Alternatively, out iterable sequences can be concatenated using
 [1, 2, 'three', 'four', 5, 6]
 ```
 
-As an equivalent, we might again use a slightly more compact list literal with the
-star notation:
+As an equivalent, we might again use a slightly more compact list literal with
+the star notation:
 
 ```pycon
 >>> flat = [*chain(*data)]
@@ -106,19 +106,19 @@ There are however more elegant techniques to achieve the same.
 
 ### Functional approach
 
-One possible way to sum sequences of the same type is by using the
-`functools.reduce` and `operator.add` functions:
+One possible way to sum sequences of the same type is by cumulatively adding
+them using the [`functools.reduce`][docs_reduce] function:
 
 ```pycon
 >>> from functools import reduce
->>> from operator import add
-
->>> flat = reduce(add, data)
+>>> flat = reduce(lambda x, y: x + y, data)
 >>> flat
 [1, 2, 'three', 'four', 5, 6]
 ```
 
-Alternatively, the built-in function `sum` can be used as well:
+**Note:** You can use [`operator.add`][docs_add] instead of the lambda function.
+
+Alternatively, the built-in function [`sum`][docs_sum] can be used as well:
 
 ```pycon
 >>> flat = sum(data, [])
@@ -126,18 +126,20 @@ Alternatively, the built-in function `sum` can be used as well:
 [1, 2, 'three', 'four', 5, 6]
 ```
 
-Note however that the [official documentation][docs_sum] suggests to use
-[itertools.chain][docs_chain] rather than `sum` to concatenate iterables.
+**Note:** the [official documentation][docs_sum] suggests to use
+`itertools.chain` rather than `sum` to concatenate iterables.
 
 ## Final notes
 
-- All solutions in the first section can also be used to join items from
-iterators. (Technically, iterators are not considered sequences as they don't
-support `len`, indexing and slicing.)
+- All solutions in the first section can also be used to join sequences
+retrieved from iterators. (Technically, iterators themselves are not considered
+[sequences][docs_sequence] as they don't support `len`, indexing and slicing.)
 
 - All solutions in the second section use addition by `+` internally, as can be
 shown by applying them to incompatible types:
 ```pycon
+>>> from functools import reduce
+>>> from operator import add
 >>> [1] + (2,)
 TypeError: can only concatenate list (not "tuple") to list
 >>> reduce(add, [[1], (2,)])
@@ -149,5 +151,8 @@ TypeError: can only concatenate list (not "tuple") to list
 - Feel free to contact me if you know of another interesting technique to
 join sequences in Python.
 
-[docs_sum]: https://docs.python.org/3/library/functions.html#sum
 [docs_chain]: https://docs.python.org/3/library/itertools.html#itertools.chain
+[docs_reduce]: https://docs.python.org/3/library/functools.html#functools.reduce
+[docs_add]: https://docs.python.org/3/library/operator.html#operator.add
+[docs_sum]: https://docs.python.org/3/library/functions.html#sum
+[docs_sequence]: https://docs.python.org/3/glossary.html#term-sequence
