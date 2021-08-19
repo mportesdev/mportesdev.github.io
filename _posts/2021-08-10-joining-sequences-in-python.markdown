@@ -13,110 +13,141 @@ offers to concatenate sequences such as lists, tuples, byte arrays etc.
 Let's assume we have the following data:
 
 ```python
-data = [[1, 2], ('three', 'four'), bytearray([53, 54])]
+data = [[1, 2], ('three', 'four'), bytearray(b'\x05\x06')]
 ```
 
 Now we want to join all the iterable sequences stored in `data` together into
 a single list. In other words, we want to flatten `data`.
 
-**Solution 1:** a nested for-loop
+### Idiomatic approach
 
-```python
+I think the most *obvious way to do it* is a list comprehension:
+
+```pycon
+>>> flat = [item for sequence in data for item in sequence]
+>>> flat
+[1, 2, 'three', 'four', 5, 6]
+```
+
+which is equivalent to a regular nested loop:
+
+```pycon
 >>> flat = []
 >>> for sequence in data:
 ...     for item in sequence:
 ...         flat.append(item)
 ... 
 >>> flat
-[1, 2, 'three', 'four', 53, 54]
+[1, 2, 'three', 'four', 5, 6]
 ```
 
-Equivalent to traditional loops would be a list comprehension with a nested
-for-loop:
+which in turn can be simplified by applying the `list.extend` method:
 
-```python
->>> flat = [item for sequence in data for item in sequence]
+```pycon
+>>> flat = []
+>>> for sequence in data:
+...     flat.extend(sequence)
+... 
 >>> flat
-[1, 2, 'three', 'four', 53, 54]
+[1, 2, 'three', 'four', 5, 6]
 ```
 
-**Solution 2:** chaining the sequences using `itertools.chain`
+Another interesting technique would be a list literal with the `*` unpacking
+notation:
 
-```python
+```pycon
+>>> [*data[0], *data[1], *data[2]]
+[1, 2, 'three', 'four', 5, 6]
+```
+
+but that would become impractical if we had many sequences in `data`.
+
+### Functional approach
+
+Alternatively, out iterable sequences can be concatenated using
+`itertools.chain`:
+
+```pycon
 >>> from itertools import chain
 
 >>> flat = list(chain(*data))
 >>> flat
-[1, 2, 'three', 'four', 53, 54]
+[1, 2, 'three', 'four', 5, 6]
 ```
 
-Equivalent to the `list()` function call would be a list literal with the `*`
-unpacking notation:
+As an equivalent, we might again use a slightly more compact list literal with the
+star notation:
 
-```python
+```pycon
 >>> flat = [*chain(*data)]
 >>> flat
-[1, 2, 'three', 'four', 53, 54]
+[1, 2, 'three', 'four', 5, 6]
 ```
 
 ## Joining sequences of the same type
 
-Typically, objects of the same type can be concatenated by simply summing them
-together. In the following scenario, we have all our data stored in lists:
+In addition to the solutions demonstrated above, sequences of the same type can
+typically be concatenated by simply summing them together. In the following
+scenario, we have all our data stored in lists:
 
 ```python
-numbers = [1, 2]
-strings = ['three', 'four']
-data = [numbers, strings]
+data = [[1, 2], ['three', 'four'], [5, 6]]
 ```
 
-Again, we intend to join `numbers` and `strings` into a single flat list.
+Again, we intend to join the numbers and strings into a single flat list. The
+first solution is obvious but not very practical:
 
-**Solution 1:** summing the lists with the `+` operator
-
-```python
->>> numbers + strings
-[1, 2, 'three', 'four']
+```pycon
+>>> data[0] + data[1] + data[2]
+[1, 2, 'three', 'four', 5, 6]
 ```
 
-**Solution 2:** summing the lists using `functools.reduce` and
-`operator.add`
+There are however more elegant techniques to achieve the same.
 
-```python
+### Functional approach
+
+One possible way to sum sequences of the same type is by using the
+`functools.reduce` and `operator.add` functions:
+
+```pycon
 >>> from functools import reduce
 >>> from operator import add
 
 >>> flat = reduce(add, data)
 >>> flat
-[1, 2, 'three', 'four']
+[1, 2, 'three', 'four', 5, 6]
 ```
 
-**Solution 3:** summing the lists using `sum`
+Alternatively, the built-in function `sum` can be used as well:
 
-```python
+```pycon
 >>> flat = sum(data, [])
 >>> flat
-[1, 2, 'three', 'four']
+[1, 2, 'three', 'four', 5, 6]
 ```
 
-Note: the [official documentation][docs_sum] suggests to use
+Note however that the [official documentation][docs_sum] suggests to use
 [itertools.chain][docs_chain] rather than `sum` to concatenate iterables.
 
-In addition, we can of course take any of the approaches demonstrated in the
-previous section. For example, the list comprehension:
+## Final notes
 
-```python
->>> flat = [item for a_list in data for item in a_list]
->>> flat
-[1, 2, 'three', 'four']
+- All solutions in the first section can also be used to join items from
+iterators. (Technically, iterators are not considered sequences as they don't
+support `len`, indexing and slicing.)
+
+- All solutions in the second section use addition by `+` internally, as can be
+shown by applying them to incompatible types:
+```pycon
+>>> [1] + (2,)
+TypeError: can only concatenate list (not "tuple") to list
+>>> reduce(add, [[1], (2,)])
+TypeError: can only concatenate list (not "tuple") to list
+>>> sum([[1], (2,)], [])
+TypeError: can only concatenate list (not "tuple") to list
 ```
 
-Or the starry list literal:
-
-```python
->>> [*numbers, *strings]
-[1, 2, 'three', 'four']
-```
+- Feel free to contact me if you know of another interesting technique to
+join sequences in Python.
 
 [docs_sum]: https://docs.python.org/3/library/functions.html#sum
 [docs_chain]: https://docs.python.org/3/library/itertools.html#itertools.chain
