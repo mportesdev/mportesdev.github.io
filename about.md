@@ -4,8 +4,6 @@ title: About
 permalink: /about/
 ---
 
-This blog is mostly focused around my current endeavors
-in Python programming.
+This blog is powered by [GitHub Pages and Jekyll][pages_jekyll].
 
-I plan to publish content ranging from short articles and tutorials
-to small daily TILs and random notes for myself.
+[pages_jekyll]: https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll
