@@ -5,9 +5,7 @@
 layout: home
 ---
 
-Welcome. My name is Michal this is my mini-blog. It is mostly focused around my
-current endeavors in [Python][Python] programming. I will publish content here
-ranging from small experiments and notes for myself to short tutorials and
-articles.
+Welcome to my mini-blog. Its content is mostly focused around my current
+endeavours in [Python][Python] programming.
 
 [Python]: https://www.python.org/
