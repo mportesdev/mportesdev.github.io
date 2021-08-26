@@ -6,17 +6,20 @@ categories: articles
 ---
 
 This is a simple experiment in Python comparing performance of two alternative
-solutions to the same problem. The task is simple: remove all occurrences of
-`4` from a list of numbers.
+solutions to the same problem.
 
-This will be a [LBYL][lbyl] approach to the problem: 
+The task is simple: remove all occurrences of a value from a list. In the
+following examples, we will have a list named `numbers` containing integers from
+0 to 4, and we will remove all occurrences of `4` from the list in-place. 
+
+This will be the [LBYL][lbyl] approach:
 
 ```python
 while 4 in numbers:
     numbers.remove(4)
 ```
 
-And this will be an [EAFP][eafp] approach: 
+And this will be the [EAFP][eafp] approach:
 
 ```python
 while True:
@@ -26,24 +29,23 @@ while True:
         break
 ```
 
-In theory, the former approach should be slower because with each iteration,
-the loop condition will perform an additional item look-up in the list.
-Let's verify this assumption.
+In theory, the former approach should be less efficient compared to the latter
+because with each iteration, the loop condition will perform an additional item
+look-up in the list. Let's verify this assumption.
 
-## Comparison with a short list
+## Processing a short list
+
+Scenario:
+- list length: 5,000 items
+- number of repetitions: 100,000
 
 The [`timeit.timeit`][timeit] function will be used to perform the operation
 many times repeatedly and measure the execution time.
 
-- list length: 5,000
-- number of repetitions: 100,000
-
 ```python
 from timeit import timeit
 
-setup = '''
-numbers = list(range(5)) * 1000
-'''
+setup = 'numbers = list(range(5)) * 1000'
 
 lbyl_code = '''
 while 4 in numbers:
@@ -82,15 +84,17 @@ EAFP: 5.903339722019155
 ```
 
 We can see that the `try-except` approach is indeed faster, but the difference
-is not drastic.
+is not significant.
 
-## Comparison with a long list
+## Processing a long list
+
+Scenario:
+- list length: 50,000 items
+- number of repetitions: 1
+
 
 The [`codetiming`][codetiming] third-party library will be used to perform the
 operation once without repetition and measure the execution time.
-
-- list length: 50,000
-- number of repetitions: 1
 
 ```python
 from codetiming import Timer
@@ -132,15 +136,15 @@ EAFP: 3.008402475999901
 We can see that the difference in execution time is significant in this case:
 the `try-except` approach is twice as faster.
 
-## Final notes
+## Conclusion
 
-- The LBYL solution in this simple example is less efficient because of the
+The LBYL solution in this simple example is less efficient because of the
 additional `4 in numbers` list item look-up. This operation's average time
 complexity is `O(n)` which means it tends to take significantly more time in
 longer lists.
 
-- Feel free to contact me if you think something is wrong or missing in this
-blog post.
+Thank you for reading, and feel free to contact me if you think something is
+wrong or missing in this blog post.
 
 [lbyl]: https://docs.python.org/3/glossary.html#term-lbyl
 [eafp]: https://docs.python.org/3/glossary.html#term-eafp
