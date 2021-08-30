@@ -52,9 +52,6 @@ while 4 in numbers:
     numbers.remove(4)
 '''
 
-print('LBYL:', timeit(lbyl_code, setup=setup, number=100_000))
-
-
 eafp_code = '''
 while True:
     try:
@@ -63,24 +60,28 @@ while True:
         break
 '''
 
-print('EAFP:', timeit(eafp_code, setup=setup, number=100_000))
+lbyl_time = timeit(lbyl_code, setup=setup, number=100_000)
+eafp_time = timeit(eafp_code, setup=setup, number=100_000)
+
+print(f'LBYL: {lbyl_time:.3f} s')
+print(f'EAFP: {eafp_time:.3f} s')
 ```
 
 Output of three sample runs of the program:
 
 ```
-LBYL: 6.231663892016513
-EAFP: 5.89169003101415
+LBYL: 6.232 s
+EAFP: 5.892 s
 ```
 
 ```
-LBYL: 6.220698317018105
-EAFP: 5.952736995008308
+LBYL: 6.221 s
+EAFP: 5.953 s
 ```
 
 ```
-LBYL: 6.2331863199942745
-EAFP: 5.903339722019155
+LBYL: 6.233 s
+EAFP: 5.903 s
 ```
 
 We can see that the `try-except` approach is indeed faster, but the difference
@@ -101,14 +102,14 @@ from codetiming import Timer
 
 numbers = list(range(5)) * 10_000
 
-with Timer(text='LBYL: {}'):
+with Timer(text='LBYL: {:.3f} s'):
     while 4 in numbers:
         numbers.remove(4)
 
 
 numbers = list(range(5)) * 10_000
 
-with Timer(text='EAFP: {}'):
+with Timer(text='EAFP: {:.3f} s'):
     while True:
         try:
             numbers.remove(4)
@@ -119,18 +120,18 @@ with Timer(text='EAFP: {}'):
 Output of three sample runs of the program:
 
 ```
-LBYL: 6.104196606989717
-EAFP: 2.998941622005077
+LBYL: 6.104 s
+EAFP: 2.999 s
 ```
 
 ```
-LBYL: 6.334021889982978
-EAFP: 3.0097643220215105
+LBYL: 6.334 s
+EAFP: 3.010 s
 ```
 
 ```
-LBYL: 6.0991898470092565
-EAFP: 3.008402475999901
+LBYL: 6.099 s
+EAFP: 3.008 s
 ```
 
 We can see that the difference in execution time is significant in this case:
