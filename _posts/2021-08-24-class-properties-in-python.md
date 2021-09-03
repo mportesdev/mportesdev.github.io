@@ -94,4 +94,3 @@ wrong or missing in this blog post.
 
 [bpo]: https://bugs.python.org/issue19072
 [gh]: https://github.com/python/cpython/commit/805f8f9afea116c5d4d000570e3d02ae84502f43#diff-510a022afde6dbb437080870cced7548f338fb8654a4df10c425e5105a83b2e3
-[pypi]: https://pypi.org/project/class-property
