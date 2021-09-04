@@ -10,14 +10,14 @@ computed class attribute) by simply stacking the `classmethod` and `property`
 decorators. For example:
 
 ```python
-class BaseClass:
+class Class:
     @classmethod
     @property
     def reversed_mro(cls):
         return tuple(reversed(cls.__mro__))
 
 
-class SubClass(BaseClass):
+class SubClass(Class):
     ...
 ```
 
@@ -25,23 +25,23 @@ Accessing the attribute for reading works as expected in Python 3.9:
 
 ```pycon
 >>> # via class
->>> BaseClass.reversed_mro
-(<class 'object'>, <class '__main__.BaseClass'>)
+>>> Class.reversed_mro
+(<class 'object'>, <class '__main__.Class'>)
 >>> SubClass.reversed_mro
-(<class 'object'>, <class '__main__.BaseClass'>, <class '__main__.SubClass'>)
+(<class 'object'>, <class '__main__.Class'>, <class '__main__.SubClass'>)
 
 >>> # via instance
->>> BaseClass().reversed_mro
-(<class 'object'>, <class '__main__.BaseClass'>)
+>>> Class().reversed_mro
+(<class 'object'>, <class '__main__.Class'>)
 >>> SubClass().reversed_mro
-(<class 'object'>, <class '__main__.BaseClass'>, <class '__main__.SubClass'>)
+(<class 'object'>, <class '__main__.Class'>, <class '__main__.SubClass'>)
 ```
 
 as opposed to version 3.8 or earlier:
 
 ```pycon
->>> BaseClass.reversed_mro
-<bound method ? of <class '__main__.BaseClass'>>
+>>> Class.reversed_mro
+<bound method ? of <class '__main__.Class'>>
 >>> SubClass.reversed_mro
 <bound method ? of <class '__main__.SubClass'>>
 ```
@@ -55,11 +55,11 @@ interesting: it is possible to set and delete the property attribute without any
 restrictions:
 
 ```
->>> BaseClass.reversed_mro = ()
->>> BaseClass.reversed_mro
+>>> Class.reversed_mro = ()
+>>> Class.reversed_mro
 ()
->>> del BaseClass.reversed_mro
->>> hasattr(BaseClass, 'reversed_mro')
+>>> del Class.reversed_mro
+>>> hasattr(Class, 'reversed_mro')
 False
 ```
 
