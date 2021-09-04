@@ -156,14 +156,16 @@ Alternatively, the built-in function [`sum`][docs_sum] can be used as well:
 **Note:** the [official documentation][docs_sum] suggests to use
 `itertools.chain` rather than `sum` to concatenate iterables.
 
-## Final notes
+## Final note
 
-- All solutions shown in the first section can also be used to join sequences
+All solutions shown in the first section can also be used to join sequences
 retrieved from iterators. For example:
+
 ```pycon
->>> [*map(int, '12'), *(n ** 2 for n in (3, 4))]
-[1, 2, 9, 16]
+>>> [*map(int, '12'), *(2**n for n in (2, 3))]
+[1, 2, 4, 8]
 ```
+
 (Technically, iterators themselves are not considered
 [sequences][docs_sequence] as they don't support `len`, indexing and slicing.)
 

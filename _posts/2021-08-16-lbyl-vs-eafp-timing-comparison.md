@@ -137,12 +137,11 @@ EAFP: 3.008 s
 We can see that the difference in execution time is significant in this case:
 the `try-except` approach is twice as faster.
 
-## Conclusion
+## Final note
 
 The LBYL solution in this simple example is less efficient because of the
 additional `4 in numbers` list item look-up. This operation's average time
-complexity is `O(n)` which means it tends to take significantly more time in
-longer lists.
+complexity is `O(n)`.
 
 Thank you for reading, and feel free to contact me if you think something is
 wrong or missing in this blog post.

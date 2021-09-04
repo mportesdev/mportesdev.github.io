@@ -46,7 +46,7 @@ as opposed to version 3.8 or earlier:
 <bound method ? of <class '__main__.SubClass'>>
 ```
 
-This change to the language was introduced as the result of [this issue][bpo]
+This change to the language was introduced as the result of [this issue][bpo],
 with class properties being mentioned in the discussion as one of the potential
 benefits of it.
 
@@ -83,11 +83,15 @@ AttributeError: can't set attribute
 AttributeError: can't delete attribute
 ```
 
-It is unclear to me whether this inconsistency is expected. A [unit test][gh]
-was added to Python's test suite as part of the change, but it is just a simple
-test that doesn't attempt to set or delete the attribute. It seems that the
-setting and deleting behaviour of a class property may have not been taken into
-account at all.
+It is unclear to me whether this inconsistency is conscious and was anticipated
+by the Python core developers.
+
+## Final note
+
+[This unit test][gh] was added to Python's test suite as part of the change,
+but it is just a simple test that doesn't attempt to set or delete the
+attribute. It seems that the setting and deleting behaviour of a class property
+may have not been taken into account at all.
 
 Thank you for reading, and feel free to contact me if you think something is
 wrong or missing in this blog post.
