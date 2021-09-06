@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title:  "Joining sequences in Python"
 date:   2021-08-10
 categories: articles

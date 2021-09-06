@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title:  "LBYL vs EAFP Timing Comparison"
 date:   2021-08-16
 categories: articles
