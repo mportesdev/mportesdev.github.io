@@ -85,18 +85,19 @@ AttributeError: can't set attribute
 AttributeError: can't delete attribute
 ```
 
-It is unclear to me whether this inconsistency is conscious and was anticipated
-by the Python core developers.
+It is unclear to me whether this inconsistency was foreseen and/or intended by
+the Python core developers.
 
 ## Final note
 
 [This unit test][gh] was added to Python's test suite as part of the change,
 but it is just a simple test that doesn't attempt to set or delete the
-attribute. It seems that the setting and deleting behaviour of a class property
-may have not been taken into account at all.
+attribute. It seems that this part of behaviour of a class property
+(i.e. the setting and deleting part of its descriptor protocol) may have not
+been taken into account at all.
 
-Thank you for reading, and feel free to contact me if you think something is
-wrong or missing in this blog post.
+Thank you for reading, and as usual, feel free to contact me if you think
+something is wrong or missing in this blog post.
 
 [bpo]: https://bugs.python.org/issue19072
 [gh]: https://github.com/python/cpython/commit/805f8f9afea116c5d4d000570e3d02ae84502f43#diff-510a022afde6dbb437080870cced7548f338fb8654a4df10c425e5105a83b2e3
