@@ -7,7 +7,9 @@ categories: articles
 
 As of Python version 3.9, it is possible to define a class property (i.e. a
 computed class attribute) by simply stacking the `classmethod` and `property`
-decorators. For example:
+decorators.
+
+For example:
 
 ```python
 class Class:

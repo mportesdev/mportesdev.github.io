@@ -6,11 +6,12 @@ categories: articles
 ---
 
 This is a simple experiment in Python comparing performance of two alternative
-solutions to the same problem.
+solutions to the same problem. The task is simple: remove all occurrences of a
+value from a list.
 
-The task is simple: remove all occurrences of a value from a list. In the
-following examples, we will have a list named `numbers` containing integers from
-0 to 4, and we will remove all occurrences of `4` from the list in-place. 
+In the following examples, we will have a list named `numbers` containing
+integers from 0 to 4, and we will remove all occurrences of `4` from the list
+in-place. 
 
 This will be the [LBYL][lbyl] approach:
 
