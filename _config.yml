@@ -28,9 +28,10 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: mportesdev
 
 # Build settings
-remote_theme: pages-themes/modernist
+remote_theme: pages-themes/modernist@v0.2.0
 plugins:
   - jekyll-feed
+  - jekyll-remote-theme
 post_excerpts: true
 
 # Exclude from processing.
