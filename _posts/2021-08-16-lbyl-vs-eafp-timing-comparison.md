@@ -2,7 +2,6 @@
 layout: post
 title:  "LBYL vs EAFP Timing Comparison"
 date:   2021-08-16
-categories: articles
 ---
 
 This is a simple experiment in Python comparing performance of two alternative
