@@ -3,10 +3,9 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: home
-title: Welcome
 ---
 
-This is my mini-blog. It is mostly focused around my current
-endeavours in [Python][Python] programming.
+Welcome to my mini-blog. It is mostly focused around [Python][Python]
+programming.
 
 [Python]: https://www.python.org/
