@@ -7,34 +7,36 @@ date:   2021-09-07
 There are the following three alternative notations of
 [named groups in PCRE][wiki]:
 
-```regexp
-(?P<name>...)
-(?<name>...)
-(?'name'...)
-```
+- `(?P<name>...)`
+- `(?<name>...)`
+- `(?'name'...)`
 
-Only the first one is recognized by Python's [`re`][re] standard library module:
+The first one originates in Python and is the only one supported by the
+[`re`][re] standard library module:
 
 ```python
 import re
 
-# match date in format YYYYMMDD
+# match date in format YYYY/M/D
 
 regex = re.compile(
-    r"(?P<year>[0-9]{4})"
-    r"(?P<month>[0-9]{2})"
-    r"(?P<day>[0-9]{2})"
+    r'(?P<year>[0-9]{4})'
+    r'/'
+    r'(?P<month>[0-9]{1,2})'
+    r'/'
+    r'(?P<day>[0-9]{1,2})'
 )
 
-match = regex.match('20210907')
+match = regex.match('1969/7/20')
 ```
 
 ```pycon
 >>> match.groupdict()
-{'year': '2021', 'month': '09', 'day': '07'}
+{'year': '1969', 'month': '7', 'day': '20'}
 ```
 
-The other two raise an `sre_constants.error: unknown extension` error.
+The other two notations are not recognized and raise an
+`sre_constants.error: unknown extension` error.
 
 ## Final note
 
@@ -47,4 +49,4 @@ something is wrong or missing in this blog post.
 
 [wiki]: https://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions#Named_subpatterns
 [re]: https://docs.python.org/3/library/re.html#regular-expression-syntax
-[regex101]: https://regex101.com/r/xF7IuH/1
+[regex101]: https://regex101.com/r/UE4Zex/1
