@@ -31,7 +31,7 @@ class CoolPath(Path):
 First thing we learn is that subclassing Path the usual way does not work.
 
 ```pycon
->>> CoolPath('/home/michal/python/projects/')
+>>> CoolPath('/home/michal/python/scratches/')
 AttributeError: type object 'CoolPath' has no attribute '_flavour'
 ```
 
@@ -59,8 +59,8 @@ argument will be `CoolPath` rather than `Path`. This means that the
 platform-testing conditional expression will be skipped and we will get the
 above shown flavour-related error.
 
-We should be able to overcome this constraint by passing `Path` explicitly
-as the `cls` argument:
+What can we do? We should be able to overcome this constraint by passing
+`Path` explicitly as the `cls` argument:
 
 ```python
 from pathlib import Path
@@ -78,7 +78,7 @@ class CoolPath(Path):
 ```
 
 ```pycon
->>> path = CoolPath('/home/michal/python/projects/')
+>>> path = CoolPath('/home/michal/python/scratches/')
 ```
 
 Good news is that an object has been constructed successfully without the
@@ -119,7 +119,7 @@ class CoolPath(PathBase):
 Let's take our custom class for a test ride:
 
 ```pycon
->>> path = CoolPath('/home/michal/python/projects/')
+>>> path = CoolPath('/home/michal/python/scratches/')
 >>> path << 1
 CoolPath('/home/michal/python')
 >>> assert path << 0 == path
@@ -132,14 +132,15 @@ Great, everything works as intended.
 
 ## Final note
 
-It seems likely that the `Path.__new__` method is written in such a way
-that it does not allow for direct subtyping of the `Path` class.
-It is my understanding that the `if cls is Path` hardcoded condition is there
-to skip the dispatch when it is not necessary, i.e. when a `WindowsPath()` or
-`PosixPath()` call is made.
+It is my understanding that the `if cls is Path` condition
+in the `Path.__new__` method is there to skip the dispatch in cases
+when it is not necessary, i.e. when a `WindowsPath()` or `PosixPath()`
+call is made, which makes perfect sense. However, I think that this
+condition prevents direct subtyping of the `Path` class.
 
-Thank you for reading, and as usual, feel free to contact me if you think
-something is wrong or missing in this blog post.
+Thank you for reading, and feel free to contact me if you know some tricks to
+subclass `Path` directly or if you think something is wrong or missing
+in this blog post.
 
 [path]: https://docs.python.org/3/library/pathlib.html#pathlib.Path
 [gh]: https://github.com/python/cpython/blob/v3.9.7/Lib/pathlib.py#L1079
