@@ -1,21 +1,21 @@
 ---
 layout: post
-title:  "Extending a Path in Python"
+title:  "Extending pathlib.Path in Python"
 date:   2021-09-15
 ---
 
-This article demonstrates the pitfalls related to subclassing and extending the
-[`pathlib.Path`][path] class.
+This article attempts to summarize the difficulties of subclassing
+the [`pathlib.Path`][path] class from Python's standard library.
 
 Let's suppose we work with files and directories in Python and we would like
-to extend `Path` with some cool extra feature. Let's say we want to overload
-the `<<` operator, so instead of e.g. `path.parent.parent.parent` we can write
-just `path << 3`.
+to extend `Path` with some cool extra functionality. As a toy example,
+let's say we want to overload the `<<` operator, so instead of
+e.g. `path.parent.parent.parent` we can just write `path << 3`.
 
 ## Subclassing Path
 
-Our custom class will simply inherit from `Path` and the corresponding special
-method will be implemented in a simple recursive way:
+Unaware of any pitfalls, we simply write a custom class that inherits
+from `Path`, and implement the corresponding special method:
 
 ```python
 from pathlib import Path
@@ -28,39 +28,50 @@ class CoolPath(Path):
         return self.parent << other - 1
 ```
 
-First thing we learn is that subclassing Path the usual way does not work.
+We find out very soon that subclassing `Path` the usual way does not work.
 
 ```pycon
 >>> CoolPath('/home/michal/python/scratches/')
 AttributeError: type object 'CoolPath' has no attribute '_flavour'
 ```
 
-The explanation of this error is that the `Path.__new__` method is
-somewhat specific: it does not actually return objects of the `Path` class.
-Rather, it serves as a dispatch mechanism to choose between two types of
-path objects, depending on the current operating system.
-
-From the `pathlib` [source code][gh]:
+To understand this error, it is necessary to take a look at what is going on in
+the [`Path.__new__`][gh] method.
 
 ```python
-    def __new__(cls, *args, **kwargs):
+def __new__(cls, *args, **kwargs):
         if cls is Path:
             cls = WindowsPath if os.name == 'nt' else PosixPath
-
-        ...
+        self = cls._from_parts(args, init=False)
+        if not self._flavour.is_supported:
+            raise NotImplementedError("cannot instantiate %r on your system"
+                                      % (cls.__name__,))
+        self._init()
+        return self
 ```
 
-What causes trouble here is the `if cls is Path` hardcoded test that makes it
-impossible for potential subclasses of `Path` to have instances successfully
-constructed.
+As we can see, this constructor method is somewhat specific:
+it does not actually return objects of its own class.
+Rather, it serves as a dispatch mechanism to choose between two
+types of path objects, depending on the operating system the Python
+code is being run on.
+
+It is my understanding that the `if cls is Path:` condition
+is there to skip the dispatch in cases when it is not necessary,
+i.e. when a `WindowsPath()` or `PosixPath()` call is made.
+
+However, what causes trouble here is that `Path` is hardcoded in this test,
+which makes it impossible for potential subclasses of `Path` to have
+instances successfully constructed.
 
 For example, when invoked via our custom subclass, the `cls`
 argument will be `CoolPath` rather than `Path`. This means that the
-platform-testing conditional expression will be skipped and we will get the
-above shown flavour-related error.
+platform-testing conditional expression will be skipped and we will eventually
+be faced with the above shown flavour-related error.
 
-What can we do? We should be able to overcome this constraint by passing
-`Path` explicitly as the `cls` argument:
+What can we do about it? We might try to overcome this constraint by
+defining our own `__new__` method and passing `Path` explicitly as
+the `cls` argument to the superclass:
 
 ```python
 from pathlib import Path
@@ -75,10 +86,9 @@ class CoolPath(Path):
         if other == 0:
             return self
         return self.parent << other - 1
-```
 
-```pycon
->>> path = CoolPath('/home/michal/python/scratches/')
+
+path = CoolPath('/home/michal/python/scratches/')
 ```
 
 Good news is that an object has been constructed successfully without the
@@ -92,6 +102,9 @@ TypeError: unsupported operand type(s) for <<: 'PosixPath' and 'int'
 No, it does not. The problem here is that the object is now in no way related
 to `CoolPath` and does not have any knowledge of the overridden
 `__lshift__` method.
+
+At this stage, I came to a conclusion that direct subtyping of `Path` is
+not possible and a different approach must be taken.
 
 ## Subclassing platform-aware path classes
 
@@ -128,15 +141,7 @@ CoolPath('/home/michal/python')
 CoolPath('/')
 ```
 
-Great, everything works as intended.
-
-## Final note
-
-It is my understanding that the `if cls is Path` condition
-in the `Path.__new__` method is there to skip the dispatch in cases
-when it is not necessary, i.e. when a `WindowsPath()` or `PosixPath()`
-call is made, which makes perfect sense. However, I think that this
-condition prevents direct subtyping of the `Path` class.
+Everything works as intended.
 
 Thank you for reading, and feel free to contact me if you know some tricks to
 subclass `Path` directly or if you think something is wrong or missing
