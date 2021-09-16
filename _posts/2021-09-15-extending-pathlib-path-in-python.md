@@ -14,7 +14,7 @@ e.g. `path.parent.parent.parent` we can just write `path << 3`.
 
 ## Subclassing Path
 
-Unaware of any pitfalls, we simply write a custom class that inherits
+Unaware of any pitfalls, we simply define a custom class that inherits
 from `Path`, and implement the corresponding special method:
 
 ```python
@@ -56,18 +56,17 @@ Rather, it serves as a dispatch mechanism to choose between two
 types of path objects, depending on the operating system the Python
 code is being run on.
 
-It is my understanding that the `if cls is Path:` condition
+It is my understanding that the `if cls is Path` test
 is there to skip the dispatch in cases when it is not necessary,
 i.e. when a `WindowsPath()` or `PosixPath()` call is made.
 
 However, what causes trouble here is that `Path` is hardcoded in this test,
 which makes it impossible for potential subclasses of `Path` to have
 instances successfully constructed.
-
-For example, when invoked via our custom subclass, the `cls`
-argument will be `CoolPath` rather than `Path`. This means that the
-platform-testing conditional expression will be skipped and we will eventually
-be faced with the above shown flavour-related error.
+For example, when invoked via our custom subclass, the `cls` argument
+will reference `CoolPath` rather than `Path`.
+As a result, the reassignment of `cls` will be skipped and two lines later,
+we will be faced with the above shown flavour-related error.
 
 What can we do about it? We might try to overcome this constraint by
 defining our own `__new__` method and passing `Path` explicitly as
@@ -91,7 +90,7 @@ class CoolPath(Path):
 path = CoolPath('/home/michal/python/scratches/')
 ```
 
-Good news is that an object has been constructed successfully without the
+Good news is that an object has been created successfully without the
 previously seen error. But does it do what we want it to?
 
 ```pycon
@@ -100,18 +99,16 @@ TypeError: unsupported operand type(s) for <<: 'PosixPath' and 'int'
 ```
 
 No, it does not. The problem here is that the object is now in no way related
-to `CoolPath` and does not have any knowledge of the overridden
-`__lshift__` method.
+to `CoolPath` and does not have any knowledge of the custom `__lshift__` method.
 
-At this stage, I came to a conclusion that direct subtyping of `Path` is
-not possible and a different approach must be taken.
+Apparently, a different approach must be taken.
 
 ## Subclassing platform-aware path classes
 
-It seems that a possible solution to our subtyping headache should be to mimic
-the dispatch conditional we have seen in the source code of `Path.__new__`,
+It seems that the definitive solution to our problem is to mimic
+the dispatch conditional we have seen in `Path.__new__`,
 and instead of subclassing `Path`, use one of the platform-specific classes
-as our base class. Then we should be able to inherit from this base class.
+as a base class.
 
 ```python
 import os
@@ -127,12 +124,14 @@ class CoolPath(PathBase):
         if other == 0:
             return self
         return self.parent << other - 1
+
+
+path = CoolPath('/home/michal/python/scratches/')
 ```
 
-Let's take our custom class for a test ride:
+No error, an object has been created. Let's take it for a test ride:
 
 ```pycon
->>> path = CoolPath('/home/michal/python/scratches/')
 >>> path << 1
 CoolPath('/home/michal/python')
 >>> assert path << 0 == path
@@ -141,7 +140,12 @@ CoolPath('/home/michal/python')
 CoolPath('/')
 ```
 
-Everything works as intended.
+The overloaded operator works exactly as intended.
+
+## Final note
+
+I came to a conclusion that direct subtyping of `Path` is not possible due to
+the way its `__new__` method is implemented.
 
 Thank you for reading, and feel free to contact me if you know some tricks to
 subclass `Path` directly or if you think something is wrong or missing
