@@ -103,7 +103,7 @@ to `CoolPath` and does not have any knowledge of the custom `__lshift__` method.
 
 Apparently, a different approach must be taken.
 
-## Subclassing platform-aware path classes
+## Subclassing platform-aware Path class
 
 It seems that the definitive solution to our problem is to mimic
 the dispatch conditional we have seen in `Path.__new__`,
@@ -129,7 +129,7 @@ class CoolPath(PathBase):
 path = CoolPath('/home/michal/python/scratches/')
 ```
 
-No error, an object has been created. Let's take it for a test ride:
+An object has been created without an error. Let's take it for a test ride:
 
 ```pycon
 >>> path << 1
