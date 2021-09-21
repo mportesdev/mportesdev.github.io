@@ -31,6 +31,8 @@ match = regex.match('1969/7/20')
 ```
 
 ```pycon
+>>> match['month']
+'7'
 >>> match.groupdict()
 {'year': '1969', 'month': '7', 'day': '20'}
 ```
