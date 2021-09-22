@@ -1,11 +1,33 @@
-body {
-  background-color: #fafdfd;
-}
+$my_bg: #ddd !default;
+$my_links: #090 !default;
+$my_code: #eee !default;
 
 .site-header {
-  background-color: #b2e2e2;
+  background-color: $my_bg;
 }
 
 .site-footer {
-  background-color: #b2e2e2;
+  background-color: $my_bg;
+}
+
+a {
+  color: $my_links;
+
+  &:visited {
+    color: $my_links;
+  }
+
+  &:hover {
+    color: $my_links;
+  }
+}
+
+pre, code {
+  background-color: $my_code;
+}
+
+.highlight {
+  .highlighter-rouge & {
+    background: $my_code;
+  }
 }
