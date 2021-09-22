@@ -23,7 +23,7 @@ email: michalportes1@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Michal Porteš
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://mportesdev.github.io"
+url: https://mportesdev.github.io
 # twitter_username: jekyllrb
 github_username: mportesdev
 
