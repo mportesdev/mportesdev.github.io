@@ -28,6 +28,13 @@ pre, code {
 
 .highlight {
   .highlighter-rouge & {
-    background: $my_code;
+    background-color: $my_code;
   }
+}
+
+.post-tag {
+  font-size: $base-font-size * 0.75;
+  padding: 3px;
+  background-color: $my_code;
+  border-radius: 3px;
 }
