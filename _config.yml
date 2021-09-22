@@ -23,7 +23,7 @@ email: michalportes1@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Michal Porteš
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://mportesdev.github.io"
 # twitter_username: jekyllrb
 github_username: mportesdev
 
@@ -31,8 +31,7 @@ github_username: mportesdev
 theme: minima
 plugins:
   - jekyll-feed
-  - jekyll-remote-theme
-post_excerpts: true
+show_excerpts: true
 
 # Exclude from processing.
 # The following items will not be processed, by default.
