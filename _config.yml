@@ -26,6 +26,8 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: https://mportesdev.github.io
 # twitter_username: jekyllrb
 github_username: mportesdev
+disqus:
+  shortname: mportesdev
 
 # Build settings
 theme: minima
