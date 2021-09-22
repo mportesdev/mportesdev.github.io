@@ -2,6 +2,8 @@
 layout: post
 title:  "Importing Python Code from URL"
 date:   2021-09-01
+tags: [python, imports]
+comments: false
 ---
 
 I got the idea for this experiment when reading a discussion on Slack.

@@ -2,6 +2,8 @@
 layout: post
 title:  "Extending pathlib.Path in Python"
 date:   2021-09-15
+tags: [python, oop]
+comments: false
 ---
 
 This article attempts to summarize the _gotcha_ associated with subclassing

@@ -2,6 +2,8 @@
 layout: post
 title:  "Class Properties in Python"
 date:   2021-08-24
+tags: [python, oop]
+comments: false
 ---
 
 As of Python version 3.9, it is possible to define a class property (i.e. a

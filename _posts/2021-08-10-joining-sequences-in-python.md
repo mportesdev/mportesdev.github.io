@@ -2,6 +2,8 @@
 layout: post
 title:  "Joining sequences in Python"
 date:   2021-08-10
+tags: [python, data structures]
+comments: false
 ---
 
 This article explores the numerous ways Python offers
