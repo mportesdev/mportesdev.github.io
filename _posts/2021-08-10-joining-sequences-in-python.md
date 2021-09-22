@@ -4,8 +4,8 @@ title:  "Joining sequences in Python"
 date:   2021-08-10
 ---
 
-In this short article we will explore some of the numerous ways Python
-offers to concatenate sequences such as lists, tuples, byte arrays etc.
+This article explores the numerous ways Python offers
+to concatenate sequences such as lists, strings, byte arrays and other.
 
 ## Joining sequences of different types
 
@@ -17,8 +17,9 @@ strings = ('three', 'four')
 binary = b'\x05\x06'
 ```
 
-and we want to join `numbers`, `strings` and `binary` together into a single
-flat list `[1, 2, 'three', 'four', 5, 6]`.
+Our data is stored in three collections of different types (list, tuple
+and bytes). Now we want to join `numbers`, `strings` and `binary` together
+into a single flat list `[1, 2, 'three', 'four', 5, 6]`.
 
 ### Traditional approach
 
@@ -75,28 +76,14 @@ from itertools import chain
 ```
 
 ```pycon
->>> list(chain(*data))
-[1, 2, 'three', 'four', 5, 6]
-```
-
-or
-
-```pycon
->>> [*chain(*data)]
+>>> list(chain(*data))                 # or: [*chain(*data)]
 [1, 2, 'three', 'four', 5, 6]
 ```
 
 which is equivalent to
 
 ```pycon
->>> list(chain.from_iterable(data))
-[1, 2, 'three', 'four', 5, 6]
-```
-
-or
-
-```pycon
->>> [*chain.from_iterable(data)]
+>>> list(chain.from_iterable(data))    # or: [*chain.from_iterable(data)]
 [1, 2, 'three', 'four', 5, 6]
 ```
 
@@ -166,7 +153,7 @@ retrieved from iterators. For example:
 ```
 
 (Technically, iterators themselves are not considered
-[sequences][docs_sequence] as they don't support `len`, indexing and slicing.)
+[sequences][docs_sequence] as they don't support indexing, slicing and `len`)
 
 Thank you for reading, and feel free to contact me if you know of another
 interesting technique to join sequences in Python, or if you think something is

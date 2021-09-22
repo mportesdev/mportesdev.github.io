@@ -4,8 +4,10 @@ title:  "Regex Named Groups in Python"
 date:   2021-09-07
 ---
 
-There are the following three alternative notations of
-[named groups in PCRE][wiki]:
+This is just a quick refresher on the syntax of named groups
+(also known as named subpatterns) in regular expressions.
+
+There are three alternative notations of [named groups in PCRE][wiki]:
 
 - `(?P<name>...)`
 - `(?<name>...)`

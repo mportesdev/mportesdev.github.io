@@ -4,12 +4,12 @@ title:  "Extending pathlib.Path in Python"
 date:   2021-09-15
 ---
 
-This article attempts to summarize the difficulties of subclassing
+This article attempts to summarize the _gotcha_ associated with subclassing
 the [`pathlib.Path`][path] class from Python's standard library.
 
 Let's suppose we work with files and directories in Python and we would like
 to extend `Path` with some cool extra functionality. As a toy example,
-let's say we want to overload the `<<` operator, so instead of
+let's say we want to overload the `<<` operator, so that instead of
 e.g. `path.parent.parent.parent` we can just write `path << 3`.
 
 ## Subclassing Path
