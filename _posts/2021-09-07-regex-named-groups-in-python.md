@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "Regex Named Groups in Python"
-date:   2021-09-07
 tags: [python, regex]
 comments: false
 ---

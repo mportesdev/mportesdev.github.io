@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "LBYL vs EAFP Timing Comparison"
-date:   2021-08-16
 tags: [python, timing]
 comments: false
 ---
