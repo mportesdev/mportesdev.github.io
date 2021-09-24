@@ -1,9 +1,9 @@
 ---
 layout: home
+title: Welcome
 list_title: Recent Posts
 ---
 
-Welcome to my mini-blog. The content here is mostly focused around
-[Python][Python] programming.
+This is my mini-blog about [Python][python] programming.
 
-[Python]: https://www.python.org/
+[python]: https://www.python.org/
