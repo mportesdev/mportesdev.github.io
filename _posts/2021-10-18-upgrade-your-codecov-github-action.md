@@ -6,7 +6,7 @@ comments: false
 ---
 
 If you use GitHub Actions for automated testing and continuous integration of
-you project, chances are you also measure the test coverage, and that you
+your project, chances are you also measure the test coverage, and that you
 upload the results to [Codecov][codecov].
 
 Codecov offers their own [action on Actions Marketplace][action] which
@@ -27,12 +27,12 @@ In the best-case scenario, all it should take to upgrade is simply changing
 `v1` to `v2` in the action specifier (see the above snippet)
 in your workflow's YAML file. There is however one inconsistency that
 I observed in the behaviour of the two versions with regard to
-Python/pytest.
+Python and pytest.
 
 The thing is, __codecov-action__ searches for a coverage report in XML
 format by default. At the same time, the `pytest-cov` plugin does not
 write an XML file by default. It must be either configured to do so or
-a `--cov-report=xml` option must be passed to `pytest`.
+a `--cov-report=xml` option must be passed when running `pytest`.
 
 When an XML coverage report is not found, the deprecated __codecov-action__
 version 1 will simply run `coverage xml` which will generate the report
@@ -44,7 +44,7 @@ Example from an actual workflow's output:
     -> Running coverage xml
 ```
 
-and subsequently:
+followed by:
 
 ```
 ==> Searching for coverage ...
@@ -57,11 +57,23 @@ that my workflow's output contains an error message:
 
 ```
 ['info'] Searching for coverage files...
-['error'] There was an error running the uploader: No coverage files located...
+['error'] There was an error running the uploader: No coverage files found, exiting.
 ```
 
-After I added the aforementioned `--cov-report=xml` option to the
-`pytest --cov` command, the coverage data upload started working again.
+This means that we must be explicit about generating the XML file.
+In its simplest form, the relevant part of the workflow's YAML
+could look like this:
+
+```
+    - name: Run tests and coverage
+      run: pytest --cov=src --cov-report=xml
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+```
+
+where `src` is path to the tested code. After adding the `--cov-report=xml`
+option as shown above, the coverage data upload started working again.
 
 # Final Note
 
