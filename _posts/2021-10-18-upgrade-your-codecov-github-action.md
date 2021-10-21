@@ -3,6 +3,7 @@ layout: post
 title:  Upgrade Your codecov GitHub Action
 tags: [github actions, test coverage]
 comments: false
+yaml_literal: "${{ steps.run_tests.outputs.COV_REPORT }}"
 ---
 
 If you use GitHub Actions for automated testing and continuous integration of
@@ -13,7 +14,7 @@ Codecov offers their own [action on Actions Marketplace][action] which
 can be easily integrated into a workflow. For example, this is what one
 of a job's steps may look like in YAML:
 
-```
+```yaml
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
 ```
@@ -64,7 +65,7 @@ This means that we must be explicit about generating the XML file.
 In its simplest form, the relevant part of the workflow's YAML
 could look like this:
 
-```
+```yaml
     - name: Run tests and coverage
       run: pytest --cov=src --cov-report=xml
 
@@ -74,6 +75,24 @@ could look like this:
 
 where `src` is path to the tested code. After adding the `--cov-report=xml`
 option as shown above, the coverage data upload started working again.
+
+To be absolutely sure that the report file will be found, it might be a good
+idea to explicitly specify its full path in one step and make it available
+to the following step through its [outputs][outputs]. For example:
+
+```yaml
+    - name: Run tests and coverage
+      id: run_tests
+      run: |
+        COV_REPORT="$HOME/coverage/coverage.xml"
+        pytest --cov=src --cov-report=xml":$COV_REPORT"
+        echo "::set-output name=COV_REPORT::$COV_REPORT"
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        files: {{ page.yaml_literal }}
+```
 
 # Final Note
 
@@ -89,3 +108,4 @@ is wrong or missing in this blog post.
 [codecov]: https://about.codecov.io/
 [action]: https://github.com/marketplace/actions/codecov
 [blog]: https://about.codecov.io/blog/codecov-uploader-deprecation-plan/
+[outputs]: https://docs.github.com/en/actions/learn-github-actions/workflow-commands-for-github-actions#setting-an-output-parameter
