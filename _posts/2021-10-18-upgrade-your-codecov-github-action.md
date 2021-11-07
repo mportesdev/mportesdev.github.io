@@ -3,7 +3,6 @@ layout: post
 title:  Upgrade Your codecov GitHub Action
 tags: [github actions, test coverage]
 comments: false
-yaml_literal: "${{ steps.run_tests.outputs.COV_REPORT }}"
 ---
 
 If you use GitHub Actions for automated testing and continuous integration of
@@ -80,6 +79,7 @@ To be absolutely sure that the report file will be found, it might be a good
 idea to explicitly specify its full path in one step and make it available
 to the following step through its [outputs][outputs]. For example:
 
+{% raw %}
 ```yaml
     - name: Run tests and coverage
       id: run_tests
@@ -91,8 +91,9 @@ to the following step through its [outputs][outputs]. For example:
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2
       with:
-        files: {{ page.yaml_literal }}
+        files: ${{ steps.run_tests.outputs.COV_REPORT }}
 ```
+{% endraw %}
 
 # Final Note
 
