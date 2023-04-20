@@ -87,9 +87,6 @@ AttributeError: can't delete attribute
 
 It is unclear to me whether this inconsistency was foreseen and/or intended by
 the Python core developers.
-
-## Note
-
 [This unit test][test] was added to Python's test suite as part of the change,
 but it is just a simple test that doesn't attempt to set or delete the
 attribute. It seems that this part of behaviour of a class property

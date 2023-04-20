@@ -21,14 +21,9 @@ class Table(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
-    # annotated non-nullable
     col_1: Mapped[int | None]
-    # annotated nullable
     col_2: Mapped[int]
-
-    # non-annotated non-nullable
     col_3 = mapped_column(Integer)
-    # non-annotated nullable
     col_4 = mapped_column(Integer, nullable=False)
 ```
 

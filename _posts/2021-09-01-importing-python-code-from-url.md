@@ -77,19 +77,13 @@ Let's try another example. We will import the main file from the
 
 Again, everything seems to work just fine.
 
-## Final notes
+## Final note
 
-- Before returning from the `module_from_url` function, it might be a good idea
+Before returning from the `module_from_url` function, it might be a good idea
 to cache the dynamically imported module by setting
 `sys.modules[module_name] = module`, so that e.g.
 `simplematch is sys.modules['simplematch']` is true (consistently with modules
 imported the usual way).
-
-- This is just a quick and naive exercise. Don't use it in any serious way.
-
-Thank you for reading, and feel free to contact me if you have an idea for a
-simpler solution (e.g. one without a temporary file) or if you think something
-is wrong or missing in this blog post.
 
 [codebreaker]: https://github.com/asweigart/codebreaker
 [sieve]: https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
