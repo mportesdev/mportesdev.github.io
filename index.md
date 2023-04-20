@@ -4,6 +4,4 @@ title: Welcome
 list_title: Recent Posts
 ---
 
-This is my mini-blog about [Python][python] programming.
-
-[python]: https://www.python.org/
+This is my personal note pad mostly about Python, SQL, GitHub and stuff.

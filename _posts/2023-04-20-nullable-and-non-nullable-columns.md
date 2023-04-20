@@ -1,9 +1,11 @@
 ---
 layout: post
-title:  "Nullable and non-nullable columns in SQLAlchemy 2.x"
+title:  "Nullable and non-nullable columns in SQLAlchemy 2"
 tags: [python, sql]
 comments: false
 ---
+
+Two basic ways to declare the nullable property of a table column in SQLAlchemy 2.x ORM.
 
 ```python
 from sqlalchemy import Integer
@@ -30,9 +32,8 @@ class Table(Base):
     col_4 = mapped_column(Integer, nullable=False)
 ```
 
-The columns `col_1` and `col_2` are declared using only the `Mapped` type
-annotation. For comparison, the columns `col_3` and `col_4` are declared using
-the `mapped_column` function.
+The columns `col_1` and `col_2` are declared using only the `Mapped` type annotation.
+The columns `col_3` and `col_4` are declared using the `mapped_column` function.
 
 `col_1` and `col_3` are nullable columns:
 

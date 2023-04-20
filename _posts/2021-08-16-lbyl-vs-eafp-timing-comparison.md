@@ -144,9 +144,6 @@ The LBYL solution in this simple example is less efficient because of the
 additional `4 in numbers` list item look-up. This operation's average time
 complexity is `O(n)`.
 
-Thank you for reading, and feel free to contact me if you think something is
-wrong or missing in this blog post.
-
 [lbyl]: https://docs.python.org/3/glossary.html#term-lbyl
 [eafp]: https://docs.python.org/3/glossary.html#term-eafp
 [timeit]: https://docs.python.org/3/library/timeit.html#timeit.timeit

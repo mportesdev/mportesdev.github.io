@@ -156,10 +156,6 @@ retrieved from iterators. For example:
 (Technically, iterators themselves are not considered
 [sequences][docs_sequence] as they don't support indexing, slicing and `len`)
 
-Thank you for reading, and feel free to contact me if you know of another
-interesting technique to join sequences in Python, or if you think something is
-wrong or missing in this blog post.
-
 [docs_chain]: https://docs.python.org/3/library/itertools.html#itertools.chain
 [docs_reduce]: https://docs.python.org/3/library/functools.html#functools.reduce
 [docs_sum]: https://docs.python.org/3/library/functions.html#sum
