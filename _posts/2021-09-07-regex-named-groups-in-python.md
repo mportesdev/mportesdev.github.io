@@ -41,17 +41,11 @@ match = regex.match('1969/7/20')
 ```
 
 The other two notations are not recognized and raise an
-`sre_constants.error: unknown extension` error.
-
-## Final note
+`re.error: unknown extension` error.
 
 You can further experiment with the above example by going to
-[regex101.com][regex101] and switching between the `PCRE` and `Python` regex
-flavor.
-
-Thank you for reading, and as always, feel free to contact me if you think
-something is wrong or missing in this blog post.
+[https://regex101.com/r/UE4Zex/1](https://regex101.com/r/UE4Zex/1) and switching
+between the `PCRE` and `Python` regex flavor.
 
 [wiki]: https://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions#Named_subpatterns
 [re]: https://docs.python.org/3/library/re.html#regular-expression-syntax
-[regex101]: https://regex101.com/r/UE4Zex/1

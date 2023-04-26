@@ -96,8 +96,5 @@ use cases are quite limited. It would perhaps make sense in some
 critical loop with many method calls, and only in cases when the
 loop represents an actual bottleneck in the program.
 
-Thank you for reading, and feel free to contact me if you think something
-is wrong or missing in this blog post.
-
 [timeit]: https://docs.python.org/3/library/timeit.html#timeit.timeit
 [docs]: https://docs.python.org/3/reference/datamodel.html#the-standard-type-hierarchy

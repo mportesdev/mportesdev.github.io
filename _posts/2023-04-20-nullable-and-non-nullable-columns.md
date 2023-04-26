@@ -5,7 +5,7 @@ tags: [python, sql]
 comments: false
 ---
 
-Two basic ways to declare the nullable property of a table column in SQLAlchemy 2.x ORM.
+Two basic ways to declare the nullable property of a table column in SQLAlchemy 2.0 [ORM].
 
 ```python
 from sqlalchemy import Integer
@@ -27,8 +27,8 @@ class Table(Base):
     col_4 = mapped_column(Integer, nullable=False)
 ```
 
-The columns `col_1` and `col_2` are declared using only the `Mapped` type annotation.
-The columns `col_3` and `col_4` are declared using the `mapped_column` function.
+The columns `col_1` and `col_2` are declared using only the [Mapped] type annotation.
+The columns `col_3` and `col_4` are declared using the [mapped_column] function.
 
 `col_1` and `col_3` are nullable columns:
 
@@ -47,3 +47,7 @@ False
 >>> Table.col_4.nullable
 False
 ```
+
+[ORM]: https://docs.sqlalchemy.org/en/20/orm/quickstart.html
+[Mapped]: https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped
+[mapped_column]: https://docs.sqlalchemy.org/en/20/orm/mapping_api.html#sqlalchemy.orm.mapped_column

@@ -148,9 +148,6 @@ The overloaded operator works exactly as intended.
 I came to a conclusion that direct subtyping of `Path` is not possible due to
 the way its `__new__` method is implemented.
 
-Thank you for reading, and feel free to contact me if you know some tricks to
-subclass `Path` directly or if you think something is wrong or missing
-in this blog post.
 
 [path]: https://docs.python.org/3/library/pathlib.html#pathlib.Path
 [gh]: https://github.com/python/cpython/blob/v3.9.7/Lib/pathlib.py#L1079
