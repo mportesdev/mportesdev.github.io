@@ -5,7 +5,7 @@ tags: [python, oop]
 comments: false
 ---
 
-This article attempts to summarize the _gotcha_ associated with subclassing
+Demonstration of the *gotcha* associated with subclassing
 the [`pathlib.Path`][path] class from Python's standard library.
 
 Let's suppose we work with files and directories in Python and we would like

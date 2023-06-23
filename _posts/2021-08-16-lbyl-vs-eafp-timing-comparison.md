@@ -5,13 +5,12 @@ tags: [python, timing]
 comments: false
 ---
 
-This is a simple experiment in Python comparing performance of two alternative
-solutions to the same problem. The task is simple: remove all occurrences of a
-value from a list.
+A simple experiment in Python comparing performance of two approaches
+to solve the same problem.
 
 In the following examples, we will have a list named `numbers` containing
-integers from 0 to 4, and we will remove all occurrences of `4` from the list
-in-place. 
+integers from 0 to 4, and our task will be to remove all occurrences of
+`4` from the list in-place.
 
 This will be the [LBYL][lbyl] approach:
 

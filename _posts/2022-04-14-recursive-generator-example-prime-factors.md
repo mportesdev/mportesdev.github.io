@@ -77,11 +77,10 @@ def prime_factors(number):
 ```
 
 The answer is "no". For example, in the case of
-`list(prime_factors(1111111111111111))`, the version with `divmod` takes about
-twice as much time compared to the previous approach -- most likely because
-both `div` and `mod` are being
-calculated with each iteration of the for-loop, whereas the original
-implementation calculates `div` in just a small fraction of the
-loop's iterations.
+`list(prime_factors(1111111111111111))`, the version with `divmod` takes
+about twice as much time compared to the previous approach -- most likely
+because both **div** and **mod** are being calculated with each iteration of
+the for-loop, whereas the original implementation calculates **div** in
+just a small fraction of the loop's iterations.
 
 [docs_divmod]: https://docs.python.org/3/library/functions.html#divmod

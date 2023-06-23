@@ -5,6 +5,8 @@ tags: [python, imports]
 comments: false
 ---
 
+A rather silly experiment.
+
 I got the idea for this experiment when reading a discussion on Slack.
 The original question was how to make a single Python file, sitting somewhere
 in a remote GitHub repository, importable on a local machine without having
@@ -43,8 +45,8 @@ def module_from_url(module_name, url):
 ```
 
 I chose to only use the tools available in the standard library, as I wanted
-this code snippet to have no dependencies and be easily copy-pasted and tried.
-(yes, that's kind of ironic if you read the first paragraph again)
+this code snippet to have no dependencies and be easily run in a plain Python
+environment.
 
 Now let's take our function for a test ride. We are going to retrieve and import
 a file from Al Sweigart's [codebreaker][codebreaker] repository and then call

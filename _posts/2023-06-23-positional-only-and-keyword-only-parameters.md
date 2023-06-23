@@ -10,8 +10,9 @@ keyword-only parameters in Python.
 
 ## Positional-only parameters
 
-The basic property of the positional-only parameters is that unlike
-regular positional parameters, they cannot be passed as named arguments.
+The main and the most obvious feature of the positional-only parameters
+is that unlike regular positional parameters, their values cannot be
+passed as named arguments.
 
 ```python
 def add(x, /, y):
@@ -41,8 +42,9 @@ def add(x, y=0, /):
 1
 ```
 
-Note that you still must observe the basic syntactic rule that a parameter
-with a default value cannot be followed by a parameter without a default value.
+Note that you still must observe the basic syntactic rule requiring that
+in a function definition, a parameter with a default value cannot be
+followed by a parameter without a default value.
 
 ```pycon
 >> def add(x=0, y, /):
@@ -53,8 +55,9 @@ SyntaxError: non-default argument follows default argument
 
 ## Keyword-only parameters
 
-The basic property of the keyword-only parameters is that unlike
-regular keyword parameters, they cannot be passed as positional.
+The main and the most obvious feature of the keyword-only parameters
+is that unlike regular keyword parameters, their values cannot be
+passed as positional arguments.
 
 ```python
 def add(x, *, y=0):
@@ -85,8 +88,9 @@ def add(x, *, y):
 TypeError: add() missing 1 required keyword-only argument: 'y'
 ```
 
-Interestingly, among keyword-only parameters, a parameter with a default
-value can even be followed by a parameter without a default value.
+Interestingly, within the group of keyword-only parameters in a function
+definition, a parameter with a default value can even be followed by
+a parameter without a default value.
 
 ```python
 def add(x, *, y=0, z):

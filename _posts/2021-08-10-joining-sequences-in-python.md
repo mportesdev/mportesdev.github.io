@@ -5,8 +5,8 @@ tags: [python, data structures]
 comments: false
 ---
 
-This article explores the numerous ways Python offers
-to concatenate sequences such as lists, strings, byte arrays and other.
+The numerous ways Python offers to concatenate sequences such as lists,
+strings, byte arrays etc.
 
 ## Joining sequences of different types
 

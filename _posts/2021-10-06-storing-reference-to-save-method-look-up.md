@@ -31,7 +31,7 @@ for _ in range(n):
 ```
 
 i.e. to store a reference to the method and then call it directly using this
-reference as a shortcut. This technique should save us __n__ attribute look-ups
+reference as a shortcut. This technique should save us **n** attribute look-ups
 (method resolutions) which should result in reduced execution time.
 
 Let's verify this assumption. To minimize overhead, we will define and call

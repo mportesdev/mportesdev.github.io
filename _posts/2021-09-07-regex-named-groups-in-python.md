@@ -5,8 +5,8 @@ tags: [python, regex]
 comments: false
 ---
 
-This is just a quick refresher on the syntax of named groups
-(also known as named subpatterns) in regular expressions.
+A quick refresher on the syntax of named groups (also known as named
+subpatterns) in regular expressions.
 
 There are three alternative notations of [named groups in PCRE][wiki]:
 
@@ -23,11 +23,11 @@ import re
 # match date in format YYYY/M/D
 
 regex = re.compile(
-    r'(?P<year>[0-9]{4})'
-    r'/'
-    r'(?P<month>[0-9]{1,2})'
-    r'/'
-    r'(?P<day>[0-9]{1,2})'
+    '(?P<year>[0-9]{4})'
+    '/'
+    '(?P<month>[0-9]{1,2})'
+    '/'
+    '(?P<day>[0-9]{1,2})'
 )
 
 match = regex.match('1969/7/20')
