@@ -5,9 +5,10 @@ tags: [python, iterators]
 comments: false
 ---
 
-Simple demonstration that [itertools.product] does not retrieve elements from
-the input iterables lazily, i.e. only when needed. Rather, the `product` object
-will read all values immediately upon its construction.
+Simple demonstration that [itertools.product] does not retrieve elements
+from the input iterables lazily, i.e. only when the next element is needed.
+Rather, the `product` object will read all values immediately upon its
+construction.
 
 This means that if iterators and/or generators are used as the input iterables,
 all their elements will be consumed right after the call to `product`.
@@ -43,8 +44,8 @@ hot coffee
 hot tea
 ```
 
-This behavior is only explicitly mentioned in the official Python documentation
-since version 3.9:
+This behavior dates back to Python 2 but is only explicitly mentioned in
+the official documentation since version 3.9:
 
 > Before product() runs, it completely consumes the input iterables, keeping
 > pools of values in memory to generate the products. Accordingly, it is only
