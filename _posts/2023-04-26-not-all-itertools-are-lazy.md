@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Not all itertools are lazy"
+title: "Not All itertools Are Lazy"
 tags: [python, iterators]
 comments: false
 ---

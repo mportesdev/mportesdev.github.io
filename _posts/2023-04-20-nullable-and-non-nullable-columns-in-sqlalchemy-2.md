@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Nullable and non-nullable columns in SQLAlchemy 2"
+title:  "Nullable and Non-nullable Columns in SQLAlchemy 2"
 tags: [python, sql]
 comments: false
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Joining sequences in Python"
+title:  "Joining Sequences in Python"
 tags: [python, data structures]
 comments: false
 ---
