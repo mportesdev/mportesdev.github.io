@@ -33,9 +33,8 @@ SELECT count(:count_2) AS count_1
 FROM language
 
 >>> with session:
-...     n = session.scalar(query)
+...     print(session.scalar(query))
 ... 
->>> n
 3
 ```
 
@@ -48,9 +47,8 @@ SELECT count(*) AS count_1
 FROM language
 
 >>> with session:
-...     n = session.scalar(query)
+...     print(session.scalar(query))
 ... 
->>> n
 3
 ```
 
@@ -67,9 +65,8 @@ SELECT count(language.id) AS count_1
 FROM language
 
 >>> with session:
-...     n = session.scalar(query)
+...     print(session.scalar(query))
 ... 
->>> n
 3
 ```
 

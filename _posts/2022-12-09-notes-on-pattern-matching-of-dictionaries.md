@@ -7,9 +7,9 @@ comments: false
 
 Two peculiarities worth knowing about pattern matching of Python dicts.
 
-## Empty dict vs. empty list as a pattern
+## Empty dict pattern vs. empty list pattern
 
-The following code uses an empty dictionary as a pattern for matching:
+The following code uses an empty dictionary as the pattern for matching:
 
 ```python
 def match_empty_dict(obj):
@@ -22,15 +22,15 @@ def match_empty_dict(obj):
 ```pycon
 >>> match_empty_dict({})
 'match'
->>> match_empty_dict({1: 2})
+>>> match_empty_dict({0: 1})
 'match'
 ```
 
 Both the empty and the non-empty dict successfully matched against the
 `{}` pattern.
 
-Let's compare this to a seemingly equivalent example that uses an empty
-list as a pattern for matching:
+Let's compare this to a similar example that uses an empty list as the
+pattern for matching:
 
 ```python
 def match_empty_list(obj):
@@ -43,15 +43,19 @@ def match_empty_list(obj):
 ```pycon
 >>> match_empty_list([])
 'match'
->>> match_empty_list([1, 2])
+>>> match_empty_list([0])
 'no match'
 ```
 
 The non-empty list did not match against the `[]` pattern.
 
-## Dict literal vs. dict constructor as a pattern
+Explanation: even though the snippets above might appear equivalent,
+matching of mappings and matching of sequences are two completely
+different things in Python.
 
-The following code uses a dictionary literal as a pattern for matching:
+## Dict literal pattern vs. dict constructor pattern
+
+The following code uses a dictionary literal as the pattern for matching:
 
 ```python
 def match_dict_literal(obj):
@@ -70,8 +74,8 @@ def match_dict_literal(obj):
 
 The `{'x': 1}` dictionary matched the `{'x': x}` pattern as expected.
 
-Let's compare this to a seemingly equivalent example that uses a dictionary
-constructor as a pattern for matching:
+Let's compare this to a similar example that uses a dictionary
+constructor as the pattern for matching:
 
 ```python
 def match_dict_constructor(obj):
@@ -89,3 +93,11 @@ def match_dict_constructor(obj):
 ```
 
 None of the dictionaries matched the `dict(x=x)` pattern.
+
+Explanation: even though the two code snippets above look equivalent,
+they are in fact quite different. The latter syntax of the pattern
+`dict(x=x)` does not take the dictionary keys into account at all, and
+instead checks the object's attributes. The example dicts did not match
+because none of them had an attribute named `x`. This is true for all
+other classes whose objects are matched against a `cls(attribute=target)`
+pattern.
